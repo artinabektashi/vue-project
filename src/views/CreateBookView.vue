@@ -22,7 +22,8 @@
 
 <script>
 import db from '../firebase/db';
-import {doc, setDoc} from 'firebase/firestore';
+//import {doc, setDoc} from 'firebase/firestore';
+import {addDoc, collection} from 'firebase/firestore';
 
     export default{
         data(){
@@ -37,9 +38,13 @@ import {doc, setDoc} from 'firebase/firestore';
         methods:{
             async handleCreateBooks() {
                 if(!this.newBook.title.trim() || !this.newBook.description.trim() || !this.newBook.author.trim()) return;
-
+                console.log('make request to create post -> ', this.newBook);
                 try{
-                   const result= await setDoc(doc(db,"books","2"),{
+                    //update and create
+                   //const result= await setDoc(doc(db,"books","2"),{
+
+                    //create
+                    const result= await addDoc(collection(db,"books"),{
                 ...this.newBook})
              console.log(result)
                 }catch(err){
