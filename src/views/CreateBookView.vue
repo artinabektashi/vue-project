@@ -1,6 +1,6 @@
 <template>
     <h2>Create a new book</h2>
-    <form>
+    <form v-on:submit.prevent="handleCreateBooks">
         <label>
             Title  
             <input 
@@ -21,14 +21,33 @@
 </template>
 
 <script>
+import db from '../firebase/db';
+import {doc, setDoc} from 'firebase/firestore';
+
     export default{
         data(){
             return{
                 newBook : {
-                    title: 'Book1',
+                    title: '',
                     description : '',
                     author:''
                 },
+            }
+        },
+        methods:{
+            async handleCreateBooks() {
+                if(!this.newBook.title.trim() || !this.newBook.description.trim() || !this.newBook.author.trim()) return;
+
+                try{
+                   const result= await setDoc(doc(db,"books","2"),{
+                ...this.newBook})
+             console.log(result)
+                }catch(err){
+                    console.log(err)
+                }
+             this.newBook.title='';
+             this.newBook.author='';
+             this.newBook.description = '';
             }
         }
     }
