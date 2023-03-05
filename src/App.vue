@@ -1,33 +1,40 @@
 <template>
-  <HeaderComp />
+     <HeaderComp />
+  <router-view/>
 </template>
 
-<script>
 
+<script>
 import HeaderComp from './components/HeaderComp.vue';
 
-export default {
-  name: 'App',
-  components: {
-    HeaderComp
+  export default{
+    components: {
+      HeaderComp
+    }
   }
-}
 </script>
-
 <style>
 *{
   padding: 0;
   margin: 0;
-  box-sizing: inherit;
 }
-html{
-  font-size: 62.5%;
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
 }
 
-body{
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+nav {
+  padding: 30px;
+}
+
+nav a {
   color: #2c3e50;
-  box-sizing: border-box;
-  font-size: 1.6rem;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>
