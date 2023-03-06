@@ -18,9 +18,8 @@ export default {
 
     const auth = getAuth();
     onAuthStateChanged(auth, (user) =>{
-      if(user){
-        this.$store.commit('setUser', user);
-      }
+      this.$store.commit('setUser', user);
+      
     } )
   }
 }

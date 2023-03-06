@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { signOut } from '@firebase/auth';
+import { getAuth, signOut } from '@firebase/auth';
 import { mapGetters , mapState} from 'vuex';
 export default {
    
