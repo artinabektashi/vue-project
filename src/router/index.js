@@ -26,9 +26,14 @@ const routes = [
     path: "/register",
     name: "Register",
     component: () =>
-      import(/* webpackChunkName: "register" */ "../views/RegisterView.vue"),
+      import(/* webpackChunkName: "register" */ "../views/user/RegisterView.vue"),
   },
-];
+  {
+    path: '/login',
+    name: 'login',
+    component:() => import(/*webpackChunkName: "login"*/ '../views/user/LoginView.vue')
+  }
+]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

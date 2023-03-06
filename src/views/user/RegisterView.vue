@@ -1,18 +1,47 @@
+<script>
+    import {getAuth, createUserWithEmailAndPassword, updateProfile, signout} from 'firebase/auth';
+
+    export default{
+        data(){
+            return{
+             name:'Filan',
+             email:'filan@email.com',
+             password:'testtest',
+             }
+        },
+
+        methods:{
+            async handleRegisterUser(){
+                const auth = getAuth();
+                const result = await createUserWithEmailAndPassword(auth, this.email, this.password);
+
+              await updateProfile(result.user, {
+                displayName: this.name
+              })
+
+              await signout(auth);
+
+              this.$router.push();
+            }
+        }
+    }
+</script>
+
 <template>
     <main class="register-area">
         <h2>Register new user</h2>
-        <form class="register-form">
+        <form @submit.prevent="handleRegisterUser" class="register-form">
             <div class="form-group">
                 <label for="name">Name</label>
-                <input id="name" />
+                <input id="name" v-model="name" />
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input id="email" type="email" required />
+                <input id="email"  type="email" required v-model="email"/>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input id="password" type="password" required />
+                <input id="password" type="password" required  v-model="password"/>
             </div>
             <div class="controlls">
                 <button>Register</button>
@@ -53,6 +82,7 @@ h2{
     margin-bottom: 1.5rem;
 }
 .controlls>button {
+    cursor: pointer;
     color: inherit;
     padding: 0.65rem 0.75rem;
     text-transform: uppercase;
