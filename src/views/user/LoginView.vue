@@ -11,8 +11,8 @@
         },
         data(){
             return{
-                email: 'filan@gmail.com',
-                password:'testtest'
+                email: '',
+                password:''
             }
         }
     }

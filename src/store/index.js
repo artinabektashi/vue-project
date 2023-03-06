@@ -13,6 +13,13 @@ const store=createStore({
     numberOfBooks(state){
       return state.books.length;
     },
+    titleOfBooks(state){
+      return state.books.map((book) => book.title);
+    },
+    userUid(state){
+      if(!state.user) return null;
+      return state.user.uid;
+    },
     userEmail(state){
       if (!state.user) return '';
       return state.user.email
