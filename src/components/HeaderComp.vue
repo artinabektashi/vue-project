@@ -7,14 +7,13 @@
         v-bind:key="item.path"       
         ><router-link v-bind:to="item.path">{{ item.name }}</router-link></li>
     </ul>
-    <p>Currently there are: {{ books.length }}</p>
+    <!-- <p>Currently there are {{ $store.getters.numberOfBooks }} books</p> -->
+    <p>Currently there are {{ numberOfBooks }} books</p>
 </header>
 </template>
 
 <script>
-import { collection, getDocs } from '@firebase/firestore';
-import db from '../firebase/db';
-
+import {mapGetters} from 'vuex';
     export default{
         data(){
             return{
@@ -25,22 +24,11 @@ import db from '../firebase/db';
                     {path: '/contact', name:'Contact us'},
                     {path: '/books', name:'Books'},
                     {path: '/create', name:"Manage Books"}
-                ],
-                books: [],
+                ]
             }
         },
-        methods:{
-            async fetchBooks(){
-                const snapshots=await getDocs(collection(db,'books'))
-                const newBooks=[];
-                snapshots.forEach((snapshot)=>{
-                    newBooks.push(snapshot.data());
-                })
-                this.books=newBooks;
-            }
-        },
-        mounted(){
-            this.fetchBooks();
+        computed:{
+            ...mapGetters(['numberOfBooks'])
         }
     }
 </script>

@@ -10,6 +10,9 @@ import HeaderComp from './components/HeaderComp.vue';
   export default{
     components: {
       HeaderComp
+    },
+    mounted(){
+      this.$store.dispatch('fetchBooks');
     }
   }
 </script>

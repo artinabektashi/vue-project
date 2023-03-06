@@ -13,30 +13,11 @@
 </template>
 
 <script>
-import {collection, getDocs} from 'firebase/firestore'
-import db from '@/firebase/db'
-
+import {mapState} from 'vuex';
 export default {
   name: 'HomeView',
-  data(){
-    return{
-      books: [],
-    }
-  },
-  methods:{
-    async fetchBooks(){
-      const snapshots = await  getDocs(collection(db, 'books'))
-      const newBooks = [] 
-      snapshots.forEach((snapshot) =>{
-        newBooks.push(snapshot.data());
-        
-      })
-
-      this.books= newBooks;
-    }
-  },
-  mounted(){
-    this.fetchBooks()
+  computed:{
+    ...mapState(['books'])
   }
 }
 </script>
