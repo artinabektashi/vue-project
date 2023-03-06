@@ -1,11 +1,12 @@
 // const express = require('express');
+require('dotenv').config();
 import express from 'express';
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 import categoriesRouter from './routes/categoriesRouter';
 import cors from 'cors';
 import mongoose from 'mongoose';
 
-mongoose.connect("mongodb://localhost:27017").then(() => {
+mongoose.connect(`${process.env.MONGO_CONNECTION_URI}`).then(() => {
     console.log("Connected to mongodb");
 
     const PORT = 3000;
