@@ -1,7 +1,6 @@
 <template>
     <header class="head">
         <img class="head__logo" src="../assets/logo.png" />
-        <h1 class="head__title">{{ title }}</h1>
         <ul class="nav-list">
             <li v-for="item in menuItems" v-bind:key="item.path"><router-link v-bind:to="item.path">{{ item.name
             }}</router-link></li>
@@ -55,37 +54,39 @@ export default {
 .head {
     display: flex;
     align-items: flex-end;
-    gap: 3rem;
-    background-color: rgb(250, 232, 220);
-    padding: 1rem;
+    gap: 1rem;
+    background-color: rgb(241, 231, 225);
+    padding: 10px;
 }
 
-.head__title {
-    font-size: 1.3rem;
-}
 
 .head__logo {
-    max-width: 80px;
+    max-width: 50px;
+    margin-left: 1rem;
 }
 
 .nav-list {
     list-style-type: none;
     display: flex;
     gap: 3rem;
+    
 }
 
 .nav-list a {
     transition: all .2 ease-out;
+    
 }
 
 .nav-list a:hover {
-    color: rgba(63, 63, 63, 0.7);
+    color: rgba(203, 139, 139, 0.7);
+    background-color: rgb(233, 222, 216);
+    padding: 23px;
 }
 
 a:link,
 a:visited {
     text-decoration: none;
-    font-size: 1.3rem;
+    font-size: 1.9rem;
     color: #2c3e50;
     font-weight: 500;
 }

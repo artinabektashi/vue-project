@@ -30,16 +30,19 @@ export default {
   margin: 0;
   box-sizing: inherit;
 }
-
+#app{
+  background-color: #f9f8f5;
+}
 html {
   font-size: 62.5%;
+  background-color: #f9f8f5;
 }
 
 body {
   font-size: 1.6rem;
   font-family: sans-serif;
-  color: #333;
   box-sizing: border-box;
+  
 }
 
 header {
