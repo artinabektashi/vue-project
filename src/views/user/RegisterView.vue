@@ -10,11 +10,14 @@
 
         methods:{
             async handleRegisterUser(){
-                this.$store.dispatch('registerUser', {
+               await this.$store.dispatch('registerUser', {
                     name: this.name,
                      email: this.email,
                       password: this.password,
-                })
+                  
+                });
+
+                this.$router.push('/login');
             }
         }
     }

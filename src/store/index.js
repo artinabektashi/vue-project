@@ -35,8 +35,6 @@ const store=createStore({
    // loginUser({ commit }) {},
     async registerUser(_, payload) {
       await signupUser(payload);
-
-      //this.$router.push('/login');
     }
   },
   modules: {
