@@ -5,6 +5,7 @@
 
 
 <script>
+import {getAuth, onAuthStateChanged } from '@firebase/auth';
 import HeaderComp from './components/HeaderComp.vue';
 
 export default {
@@ -14,6 +15,13 @@ export default {
   },
   mounted() {
     this.$store.dispatch('fetchBooks');
+
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) =>{
+      if(user){
+        this.$store.commit('setUser', user);
+      }
+    } )
   }
 }
 </script>

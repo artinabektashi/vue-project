@@ -8,12 +8,16 @@
         </ul>
         <!-- <p>Currently there are {{ $store.getters.numberOfBooks }} books</p> -->
         <p>Currently there are {{ numberOfBooks }} books</p>
+        <p v-if="user">Nice to have you back {{ userEmail }}!</p>
+        <button @click="handleLogout">Logout</button>
     </header>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { signOut } from '@firebase/auth';
+import { mapGetters , mapState} from 'vuex';
 export default {
+   
     data() {
         return {
             title: 'E-Library',
@@ -27,8 +31,16 @@ export default {
             ]
         }
     },
+    methods:{
+        handleLogout(){
+            signOut(getAuth());
+        }
+    },
     computed: {
-        ...mapGetters(['numberOfBooks'])
+        ...mapGetters(['numberOfBooks' ,'userEmail']),
+  
+        ...mapState(['user'])
+    
     }
 }
 </script>

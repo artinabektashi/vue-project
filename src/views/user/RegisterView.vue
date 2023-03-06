@@ -1,15 +1,19 @@
 <script>
+    import LoadingIndicator from '@/components/LoadingIndicator.vue';
+
     export default{
         data(){
             return{
              name:'',
              email:'',
              password:'',
+             loading:false,
              }
         },
 
         methods:{
             async handleRegisterUser(){
+                this.loading = true;
                await this.$store.dispatch('registerUser', {
                     name: this.name,
                      email: this.email,
@@ -17,8 +21,12 @@
                   
                 });
 
+                this.loading = false;
                 this.$router.push('/login');
             }
+        },
+        components:{
+            LoadingIndicator
         }
     }
 </script>
@@ -27,6 +35,7 @@
     <main class="register-area">
         <h2>Register new user</h2>
         <form @submit.prevent="handleRegisterUser" class="register-form">
+           <LoadingIndicator  v-if="loading"/>
             <div class="form-group">
                 <label for="name">Name</label>
                 <input id="name" v-model="name" />
@@ -40,7 +49,7 @@
                 <input id="password" type="password" required  v-model="password"/>
             </div>
             <div class="controlls">
-                <button>Register</button>
+                <button :disabled="loading">Register</button>
             </div>
         </form>
     </main>
@@ -57,6 +66,7 @@
 }
 
 .register-form {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -90,4 +100,10 @@ h2{
     display: block;
     margin: 0 auto;
 }
+.controlls>button:disabled {
+    cursor: not-allowed;
+    background-color: rgb(196, 196, 196);
+   
+}
+
 </style>

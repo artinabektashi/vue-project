@@ -1,15 +1,16 @@
 <script>
-    import{getAuth, signInWithEmailAndPassword} from 'firebase/auth';
     export default{
         methods:{
             async handleLoginUser() {
-                const auth = getAuth();
-                await signInWithEmailAndPassword(auth, this.email ,this.password);
+                this.$store.dispatch('loginUser', {
+                    email: this.email, 
+                    password: this.password
+                });
+
             }
         },
         data(){
             return{
-                user: null,
                 email: 'filan@gmail.com',
                 password:'testtest'
             }
