@@ -24,13 +24,14 @@ router.get('/:categoryId', (req,res) =>{
 
 router.post('/create' , (req,res) =>{
 
-    const {name, description } = req.body;
+    const {creatorId ,name, description } = req.body;
     
     const categoriesId= (categories.map((category) => category.id))
     const nextId = Math.max(...categoriesId) + 1;
 
     const newCategory = {
         id:nextId,
+        creatorId,
         name,
         description
     };

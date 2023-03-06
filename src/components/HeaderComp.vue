@@ -8,8 +8,14 @@
         </ul>
         <!-- <p>Currently there are {{ $store.getters.numberOfBooks }} books</p> -->
         <p>Currently there are {{ numberOfBooks }} books</p>
-        <p v-if="user">Nice to have you back {{ userEmail }}!</p>
-        <button @click="handleLogout">Logout</button>
+        <div v-if="user" class="controls">
+            <div>Welcome {{ userEmail }}!</div>  
+            <button @click="handleLogout">Logout</button>
+        </div>
+        <div v-else class="controls">
+            <router-link :to="{ name: 'login'}">Login</router-link>
+            <router-link to="/register">Register</router-link>
+        </div>
     </header>
 </template>
 
@@ -27,7 +33,7 @@ export default {
                 { path: '/contact', name: 'Contact us' },
                 { path: '/books', name: 'Books' },
                 { path: '/create', name: "Manage Books" },
-                { path: '/register', name: "Register" }
+                
             ]
         }
     },
@@ -82,4 +88,9 @@ a:visited {
     font-size: 1.3rem;
     color: #2c3e50;
     font-weight: 500;
-}</style>
+}
+.controls {
+        display: flex;
+        gap: 1rem;
+    }
+</style>

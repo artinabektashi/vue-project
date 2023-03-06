@@ -12,13 +12,22 @@ export default{
         ...mapGetters(['userUid'])
     },
     methods:{
-        handleCreateCategory(){
+        async handleCreateCategory(){
             const payload = { 
                 name: this.name , 
                 description: this.description,
                 creatorId: this.userUid,
             };
-            console.log('payloag', payload)
+            const result = await fetch('http://localhost:3000/category/create',{
+                method: 'post',
+                headers : {
+                    'Content-Type': 'application/json'
+                },
+                body : JSON.stringify(payload),
+            })
+
+            const newCategory = await result.json();
+            console.log(newCategory)
         }
     }
 }
