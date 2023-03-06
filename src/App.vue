@@ -1,43 +1,40 @@
 <template>
-     <HeaderComp />
-  <router-view/>
+  <HeaderComp />
+  <router-view />
 </template>
 
 
 <script>
 import HeaderComp from './components/HeaderComp.vue';
 
-  export default{
-    components: {
-      HeaderComp
-    },
-    mounted(){
-      this.$store.dispatch('fetchBooks');
-    }
+export default {
+  components: {
+    HeaderComp
+  },
+  mounted() {
+    this.$store.dispatch('fetchBooks');
   }
+}
 </script>
 <style>
-*{
+* {
   padding: 0;
   margin: 0;
-}
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  box-sizing: inherit;
 }
 
-nav {
-  padding: 30px;
+html {
+  font-size: 62.5%;
 }
 
-nav a {
-  color: #2c3e50;
+body {
+  font-size: 1.6rem;
+  font-family: sans-serif;
+  color: #333;
+  box-sizing: border-box;
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
+header {
+  padding: 3.5rem;
 }
 </style>
