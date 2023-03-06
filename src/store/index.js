@@ -1,10 +1,12 @@
 import {getDocs, collection} from 'firebase/firestore'
 import db from '../firebase/db'
 import { createStore } from 'vuex'
+import signupUser from '@/firebase/user/signupUser';
 
 const store=createStore({
   state:{
     books:[],
+    user: null,
   },
   getters: {
     numberOfBooks(state){
@@ -14,6 +16,9 @@ const store=createStore({
   mutations: {
     setBooks(state, newBooks){
       state.books = newBooks;
+    },
+    setUser(state, user){
+      state.user= user;
     }
   },
   actions: {
@@ -26,6 +31,12 @@ const store=createStore({
         )
       })
       commit('setBooks', newBooks)
+    },
+   // loginUser({ commit }) {},
+    async registerUser(_, payload) {
+      await signupUser(payload);
+
+      //this.$router.push('/login');
     }
   },
   modules: {

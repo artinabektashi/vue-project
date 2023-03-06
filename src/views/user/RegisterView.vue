@@ -1,27 +1,20 @@
 <script>
-    import {getAuth, createUserWithEmailAndPassword, updateProfile, signout} from 'firebase/auth';
-
     export default{
         data(){
             return{
-             name:'Filan',
-             email:'filan@email.com',
-             password:'testtest',
+             name:'',
+             email:'',
+             password:'',
              }
         },
 
         methods:{
             async handleRegisterUser(){
-                const auth = getAuth();
-                const result = await createUserWithEmailAndPassword(auth, this.email, this.password);
-
-              await updateProfile(result.user, {
-                displayName: this.name
-              })
-
-              await signout(auth);
-
-              this.$router.push();
+                this.$store.dispatch('registerUser', {
+                    name: this.name,
+                     email: this.email,
+                      password: this.password,
+                })
             }
         }
     }

@@ -1,6 +1,6 @@
 <template>
-  <HeaderComp />
-  <router-view />
+  <HeaderComp/>
+  <router-view/>
 </template>
 
 
@@ -8,6 +8,7 @@
 import HeaderComp from './components/HeaderComp.vue';
 
 export default {
+
   components: {
     HeaderComp
   },
