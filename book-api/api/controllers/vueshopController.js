@@ -1,7 +1,7 @@
 //import database from "../utility/database";
 import FileService from "../../../src/services/FileService";
 import VueshopModel from "../models/VueshopModel";
-import updatedVueshopSchema from "../validator/userValidation/vueshopValidation/updateVueshopSchema";
+import updatedVueshopSchema from "../calidators/userValidation/vueshopValidation/updateVueshopSchema";
 
 export default {
   list: async (req, res) => {

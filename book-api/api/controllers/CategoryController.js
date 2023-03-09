@@ -1,7 +1,7 @@
 import CategoryModel from '../models/CategoryModel';
 import { StatusCodes,  ReasonPhrases  } from 'http-status-codes';
-import createCategorySchema from '../validators/categories/create';
-import updateCategorySchema from '../validators/categories/update';
+import createCategorySchema from '../../validators/userValidation/categories/create';
+import updateCategorySchema from '../../validators/userValidation/categories/update';
 
 const controller = {
     list: async(req, res) => {
