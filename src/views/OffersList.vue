@@ -81,6 +81,8 @@
 import axios from "axios";
 import DropzoneOffers from "../components/form/DropzoneOffers.vue";
 import Footer from "./Footer.vue";
+import MiniCart from "../components/form/Minicart.vue";
+
 export default {
   props: {
     vueshop: Object,

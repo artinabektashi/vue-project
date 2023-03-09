@@ -1,85 +1,86 @@
 <template>
-  <section class="container">
-    <h1 style="margin-bottom: 40px; margin-top: 20px">Edit Data</h1>
-    <div v-if="this.vueshop" class="card">
-      <div class="card-body">
-        <input
-          type="text"
-          placeholder="title.."
-          class="form-control"
-          v-model="vueshop.title"
-        />
+  <div class="mini-cart">
+    <div
+      class="modal fade"
+      id="miniCart"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">My Bag</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              <!--:key="item"-->
+              <li
+                v-for="item in this.$store.state.cart"
+                :key="item.id"
+                class="media"
+              >
+                <img
+                  :src="item.productImage"
+                  width="80px"
+                  class="align-self-center mr-3"
+                />
+                <div class="media-body">
+                  <h5 class="mt-0">{{ item.productName }}</h5>
+                  <span
+                    style="float: right"
+                    class="float-right"
+                    @click="$store.commit('removeFromCart', item)"
+                    >X</span
+                  >
+                  <p class="mt-0">{{ item.productPrice | currency }}</p>
+                  <p class="mt-0">Quantity : {{ item.productQuantity }}</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Continue Shopping
+            </button>
+            <button type="button" class="btn btn-primary" @click="checkout">
+              Checkout
+            </button>
+          </div>
+        </div>
       </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          <input
-            placeholder="desciption.."
-            type="text"
-            class="form-control"
-            v-model="vueshop.description"
-          />
-        </li>
-        <li class="list-group-item">
-          <input
-            type="text"
-            placeholder="$.."
-            class="form-control"
-            v-model="vueshop.price"
-          />
-        </li>
-        <li class="list-group-item">
-          <input type="text" class="form-control" v-model="vueshop.category" />
-        </li>
-      </ul>
-      <Dropzone
-        :vueshopId="this.$route.params.id"
-        :initialFiles="vueshop.files"
-      />
     </div>
-    <button
-      @click="goToList()"
-      class="btn btn-danger"
-      style="width: 150px; margin-top: 30px; float: right; margin-left: 10px"
-    >
-      Go back
-    </button>
-    <button
-      class="btn btn-outline-success"
-      @click="updateDoc((id = vueshop._id))"
-      style="width: 150px; margin-top: 30px; float: right"
-    >
-      Update
-    </button>
-  </section>
+  </div>
 </template>
 
 <script>
-import axios from "axios";
+import $ from "jquery";
+
 export default {
-  components: {
-    Dropzone,
+  name: "MiniCart",
+  props: {
+    msg: String,
   },
-  created() {
-    this.fetchVueshop();
-    axios
-      .get(`http://localhost:4000/vueshop/list`)
-      .then((response) => {
-        this.fields = response.data;
-      })
-      .catch((e) => {
-        this.errors.push(e);
-      });
+  methods: {
+    checkout() {
+      $("#miniCart").modal("hide");
+      this.$router.push("checkout");
+    },
   },
-
-  data() {
-    return {
-      vueshop: null,
-      fields: [],
-    };
-  },
-
- 
 };
 </script>
 
-<style scoped></style>
+<style></style>

@@ -4,7 +4,7 @@
       ref="filerDropzone"
       :options="dropzoneOptions"
       :useCustomSlot="true"
-      @vdropzone-mount="handleMount"
+      @vdropzone-mounted="handleMount"
       class="dz-max-files-reached"
     >
     </VueDropzone>
@@ -18,6 +18,7 @@
     },
     props: {
       vueshopId: String,
+      initialFiles: String,
     },
     data() {
       return {
@@ -45,5 +46,11 @@
     },
   };
   </script>
+  <style>
+  .dz-max-files-reached {
+    pointer-events: none;
+    cursor: none;
+  }
+  </style>
 
   
