@@ -80,9 +80,8 @@
 <script>
 import axios from "axios";
 import DropzoneOffers from "../components/form/DropzoneOffers.vue";
+import MiniCart from "../components/users/Minicart.vue";
 import Footer from "./Footer.vue";
-import MiniCart from "../components/form/Minicart.vue";
-
 export default {
   props: {
     vueshop: Object,
@@ -118,7 +117,7 @@ export default {
   },
   data() {
     return {
-       fields: [],
+      fields: [],
     };
   },
   computed: {
@@ -137,7 +136,6 @@ export default {
   color: #fff;
   margin-bottom: 15px;
 }
-
 
 .discount {
   position: absolute;
