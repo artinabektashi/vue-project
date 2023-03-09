@@ -1,6 +1,8 @@
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import OffersList from "./views/OffersList.vue";
+
 
 const routes = [
   {
@@ -21,7 +23,7 @@ const routes = [
     path: "/create",
     name: "create",
     component: () =>
-      import(/* webpackChunkName: "create" */ "../views/CreateBookView.vue"),
+      import("../views/CreateBookView.vue"),
   },
   {
     path: "/register",
@@ -30,9 +32,20 @@ const routes = [
       import(/* webpackChunkName: "register" */ "../views/user/RegisterView.vue"),
   },
   {
+    path: "/offersList",
+    name: "offersList",
+    component: OffersList,
+  },
+  {
     path: '/login',
     name: 'login',
     component:() => import(/*webpackChunkName: "login"*/ '../views/user/LoginView.vue')
+  },
+  {
+    path: "editOffer/:id",
+    name: "EditOffer",
+    component: () =>
+      import(/*webpackChunkName: "editOffer" */ "./views/EditOffer.vue"),
   },
   {
     path: '/category',

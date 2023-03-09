@@ -54,7 +54,6 @@
 </template>
 
 <script>
-import apiRequest from "../utility/apiRequest";
 import axios from "axios";
 export default {
   components: {
