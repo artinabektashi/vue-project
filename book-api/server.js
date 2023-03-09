@@ -1,13 +1,16 @@
-// const express = require('express');
-require('dotenv').config();
+import {
+    MONGO_CONNECTION_URI,
+    MONGO_DB_NAME,
+    API_PORT,
+    MONGO_DB_PORT
+} from './config';
 import express from 'express';
-import { ReasonPhrases, StatusCodes } from 'http-status-codes';
-import categoriesRouter from './routes/categoriesRouter';
+import categoryRouter from './routes/categoryRoute';
 import cors from 'cors';
 import mongoose from 'mongoose';
 
-mongoose.connect(`${process.env.MONGO_CONNECTION_URI}`).then(() => {
-    console.log("Connected to mongodb");
+mongoose.connect(`${MONGO_CONNECTION_URI}:${MONGO_DB_PORT}/${MONGO_DB_NAME}`).then(() => {
+    console.log(`Connected to mongodb on port ${MONGO_DB_PORT}`);
 
     const PORT = 3000;
 
@@ -22,17 +25,16 @@ mongoose.connect(`${process.env.MONGO_CONNECTION_URI}`).then(() => {
     app.use(express.urlencoded({ extended: true }))
     app.use(express.json());
 
+
+    app.use('/categories', categoryRouter);
+
     app.get('/user', (req, res) => {
         return res.json({ name: 'John', age: 21 })
     })
 
-    app.use('/category', categoriesRouter);
+    app.get('*', (req, res) =>  res.status(404).json({ content: 'not_found'}));
 
-    app.get('*', (req, res) => {
-        return res.status(StatusCodes.NOT_FOUND).json({ error: ReasonPhrases.NOT_FOUND })
-    })
-
-    app.listen(PORT, () => {
-        console.log(`api port ${PORT}`)
+    app.listen(API_PORT, () => {
+        console.log(`api port ${API_PORT}`)
     })
 })

@@ -8,6 +8,7 @@ const store=createStore({
   state:{
     books:[],
     user: null,
+    categories : []
   },
   getters: {
     numberOfBooks(state){
@@ -31,9 +32,23 @@ const store=createStore({
     },
     setUser(state, user){
       state.user= user;
-    }
+    },
+    setCategories(state, categories) {
+      state.categories = categories;
+  },
+  addCategory(state, category) {
+      state.categories.push(category);
+  },
   },
   actions: {
+    
+    async loginUser({ commit }, payload) {
+      const {user} = await loginUser(payload);
+      commit('setUser', user);
+     },
+     async registerUser(_, payload) {
+       await signupUser(payload);
+     },
     async fetchBooks({commit}){
       const snapshots=await getDocs(collection(db,'books'));
       const newBooks=[];
@@ -44,13 +59,27 @@ const store=createStore({
       })
       commit('setBooks', newBooks)
     },
-    async loginUser({ commit }, payload) {
-     const {user} = await loginUser(payload);
-     commit('setUser', user);
-    },
-    async registerUser(_, payload) {
-      await signupUser(payload);
-    }
+    async fetchCategories({ commit }) {
+      const res = await fetch('http://localhost:3000/categories');
+      const categories = await res.json();
+      commit('setCategories', categories)
+     },
+     async createCategory({ commit }, categoryData) {
+      const res = await fetch('http://localhost:3000/categories',
+              {
+                  method: 'post',
+                  body: JSON.stringify(categoryData),
+                  headers: {
+                      'Content-Type': 'application/json'
+                  }
+
+              }
+          )
+
+      const newCategory = await res.json();
+
+      commit('addCategory', newCategory);
+     },
   },
   modules: {
 
