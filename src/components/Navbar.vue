@@ -1,0 +1,191 @@
+<template>
+  <div class="hello">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">BookShop</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <router-link to="/" class="nav-link" aria-current="page"
+                >Home
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/about" class="nav-link">About</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/offersList" class="nav-link"
+                >Book Offers</router-link
+              >
+            </li>
+            <li class="nav-item">
+              <router-link to="/createContact" class="nav-link"
+                >Contact Us</router-link
+              >
+            </li>
+            <li class="nav-item">
+              <router-link to="/checkout" class="nav-link"
+                >Checkout</router-link
+              >
+            </li>
+            <li class="nav-item">
+              <router-link to="/admin" class="nav-link" v-if="isAdmin()">Admin</router-link>
+              
+              </li>
+          </ul>
+
+          <form class="form-inline my-2 my-lg-0">
+            <a
+              style="color: white"
+              v-if="!email"
+              class="btn btn-info"
+              data-bs-toggle="modal"
+              data-bs-target="#login"
+              >Sign in/Register</a
+            >
+
+            <a
+              class="btn btn-outline-info border-0 mx-2 my-2 my-sm-0"
+              data-bs-toggle="modal"
+              data-bs-target="#miniCart"
+            >
+              <i class="fas fa-cart-plus"></i>
+            </a>
+          </form>
+          <!-- </div> -->
+
+          <div class="btn-group" v-if="email">
+            <button
+              type="button"
+              class="btn btn-info dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              style="border-radius: 5px; color: white"
+            >
+              <img
+                class="rounded-circle dropdown-bs-toggle"
+                src="../../public/img/simpleuser.png"
+                style="width: 35px; height: 30px"
+                alt="user-avatar"
+              />
+
+              {{ email }}
+            </button>
+
+            <div class="dropdown-menu dropdown-menu-right">
+              <router-link to="/userProfile" class="nav-link"
+                >Profile</router-link
+              >
+
+              <button class="dropdown-item" type="button" @click="logout()">
+                <i class="fa fa-power-off" style="padding-right: 10px"></i>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</template>
+
+<script>
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+
+export default {
+  name: "Navbar",
+  props: {
+    msg: String,
+  },
+  data() {
+    return {
+      name: null,
+      email: null,
+      userEmail: null
+    };
+  },
+  methods: {
+    isAdmin() {
+    return this.userEmail && this.userEmail.includes("ubt-uni.net");
+  },
+    logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.replace("/");
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    },
+  },
+
+  created() {
+    var user = firebase.auth().currentUser;
+    this.email = user.email;
+    this.userEmail = user.email;
+  },
+};
+</script>
+
+<style scoped lang="scss">
+.navbar {
+  background-color: #987b6c; /* light pinkish brownish */
+}
+
+.navbar-nav .nav-link {
+  font-size: 18px; 
+  color: #fff; 
+}
+.navbar-brand{
+  color: #fff;
+}
+.navbar-nav .nav-link:hover {
+  background-color: #d3c0b4; 
+  border-radius: 10px;
+  color: black;
+}
+
+.btn-info {
+  background-color: #d3c0b4;  /* match button background color */
+  border-color: #a38879; /* match button border color */
+  color: #fff; /* set button text color to white */
+}
+
+.btn-info:hover {
+  background-color: #d1aa90; /* slightly darker color on hover */
+  border-color: #d99d7e; /* slightly darker border on hover */
+  color: #fff; /* set button text color to white */
+}
+
+.btn-group > .btn-info:active,
+.btn-group > .btn-info:focus {
+  background-color: #F7C59F !important;
+  color: white;
+  border-color: #F7C59F !important;
+}
+.navbar .btn-outline-info {
+  color: #f6e7e1 !important;
+  border-color: #977d69;
+}
+
+.navbar .btn-outline-info:hover {
+  background-color: #baa397;
+  color: white;
+}
+</style>
