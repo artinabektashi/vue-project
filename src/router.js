@@ -5,6 +5,8 @@ import About from "./views/About.vue";
 import "./views/List.vue";
 import { getAuth } from "firebase/auth";
 import CreateContact from "./views/CreateContact.vue";
+import OffersList from "./views/OffersList.vue";
+import OffersDetails from "./views/OffersDetails.vue";
 
 
 Vue.use(Router);
@@ -29,6 +31,16 @@ const router = new Router({
       name: "createContact",
       component: CreateContact,
     },
+    {
+      path: "/offersList",
+      name: "offersList",
+      component: OffersList,
+    },
+    {
+      path: "/offersDetails/:id",
+      name: "offersDetails",
+      component: OffersDetails,
+    }
     
   ],
 });
