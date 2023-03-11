@@ -40,7 +40,13 @@ const router = new Router({
       path: "/offersDetails/:id",
       name: "offersDetails",
       component: OffersDetails,
-    }
+    },
+    {
+      path: "/userProfile",
+      name: "userProfile",
+      meta: { isAuthenticated: true },
+      component: UserProfile,
+    },
     
   ],
 });
