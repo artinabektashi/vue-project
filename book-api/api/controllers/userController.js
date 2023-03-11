@@ -1,4 +1,4 @@
-import admin from "../../services/firebase";
+import admin from "../services/firebase";
 import registerUserSchema from "../validator/userValidation/registerUserSchema";
 
 
