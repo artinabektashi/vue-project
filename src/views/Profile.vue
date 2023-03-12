@@ -207,14 +207,36 @@
           .sendPasswordResetEmail(auth.currentUser.email)
           .then(() => {
             Toast.fire({
-              type: "success",
+               type: "success",
+               title: "Email sent",
             });
           })
           .catch((error) => {
             console.log(error);
           });
       },
-      
+      updateProfile() {
+        //REMINDER nese nuk behen update krejt fields gjun error :)
+        firebase.firestore();
+        db.collection("profiles")
+          .doc(this.profile.id)
+          .set({
+            name: this.profile.name,
+            phone: this.profile.phone,
+            address: this.profile.address,
+            postcode: this.profile.postcode,
+          })
+          .then(() => {
+            console.log("document updated successfully check firestore");
+            Toast.fire({
+              icon: "success",
+              title: "Updated successfully",
+            });
+          })
+          .catch((err) => {
+            console.log("An error occurred while updateing", +err.message);
+          });
+      },
     },
     created() {
       var user = firebase.auth().currentUser;

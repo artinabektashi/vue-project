@@ -339,4 +339,16 @@
   };
   </script>
  
-  
+ <style scoped lang="scss">
+.img-wrapp {
+  position: relative;
+}
+.img-wrapp span.delete-img {
+  position: absolute;
+  top: -14px;
+  left: -2px;
+}
+.img-wrapp span.delete-img:hover {
+  cursor: pointer;
+}
+</style>
