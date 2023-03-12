@@ -47,11 +47,57 @@ const router = new Router({
       meta: { isAuthenticated: true },
       component: UserProfile,
     },
-    
+    {
+      path: "/admin",
+      name: "admin",
+      component: Admin,
+      // meta: { isAdmin: true },
+      children: [
+        {
+          path: "list",
+          name: "list",
+          component: List,
+        },
+        {
+          path: "contactsList",
+          name: "contactsList",
+          component: ContactsList,
+        },
+        {
+          path: "viewContact/:id",
+          name: "ViewContact",
+          component: () =>
+            import(
+              /*webpackChunkName: "viewContact" */ "./views/ViewContact.vue"
+            ),
+        },
+        {
+          path: "editOffer/:id",
+          name: "EditOffer",
+          component: () =>
+            import(/*webpackChunkName: "editOffer" */ "./views/EditOffer.vue"),
+        },
+      ],
+    },
   ],
 });
 
+router.beforeEach(async (to, from, next) => {
+  const requiresAuth = to.matched.some(
+    (record) => record.meta.isAdmin || record.meta.isAuthenticated
+  );
+  const user = await getAuth().currentUser;
 
+  if (requiresAuth && !user) {
+   
+      next("/admin/list");
+   
+
+    next("/");
+  } else {
+    next();
+  }
+});
 
 export default router;
 
