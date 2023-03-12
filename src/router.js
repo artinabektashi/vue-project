@@ -2,6 +2,8 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import About from "./views/About.vue";
+import Products from "./views/Products.vue";
+import Profile from "./views/Profile.vue";
 import "./views/List.vue";
 import { getAuth } from "firebase/auth";
 import CreateContact from "./views/CreateContact.vue";
@@ -62,6 +64,16 @@ const router = new Router({
           path: "contactsList",
           name: "contactsList",
           component: ContactsList,
+        },
+        {
+          path: "products",
+          name: "products",
+          component: Products,
+        },
+        {
+          path: "profile",
+          name: "profile",
+          component: Profile,
         },
         {
           path: "viewContact/:id",
