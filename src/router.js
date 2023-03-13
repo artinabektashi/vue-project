@@ -89,7 +89,24 @@ const router = new Router({
           component: () =>
             import(/*webpackChunkName: "editOffer" */ "./views/EditOffer.vue"),
         },
+        {
+          path: "create",
+          name: "Create",
+          component: () =>
+            import(/*webpackChunkName: "create" */ "./views/Create.vue"),
+        },
+        {
+          path: "usersList",
+          name: "UsersList",
+          component: UsersList,
+        },
       ],
+    },
+    {
+      path: "/checkout",
+      name: "checkout",
+      component: () =>
+        import(/*webpackChunkName: "view" */ "./views/Checkout.vue"),
     },
   ],
 });
