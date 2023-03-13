@@ -145,7 +145,7 @@ export default {
 
 <style scoped lang="scss">
 .navbar {
-  background-color: #987b6c; /* light pinkish brownish */
+  background-color: #987b6c; 
 }
 
 .navbar-nav .nav-link {

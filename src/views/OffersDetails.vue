@@ -35,13 +35,21 @@
                   {{ this.vueshop.price | currency }}
                 </h5>
                 <div style="margin-top: -35px; margin-left: 40px">
-                  <a
+                  <!-- <a
                     style="width: 230px; height: 45px; padding: 10px"
                     class="btn btn-warning border-0 mx-2 my-2 my-sm-0"
                     data-bs-toggle="modal"
                     data-bs-target="#miniCart"
                     >Order now <i class="fas fa-cart-plus"></i
-                  ></a>
+                  ></a> -->
+                  <router-link class="checkout-btn" tag="button" to="/checkout">
+              <add-to-cart
+                :p-id="vueshop.title"
+                :price="vueshop.price"
+                :name="vueshop.title"
+              >
+              </add-to-cart>
+            </router-link>
                 </div>
               </div>
             </div>
@@ -86,5 +94,21 @@
     text-transform: uppercase;
     font-size: 0.85rem;
   }
+  .checkout-btn {
+  display: inline-block;
+  margin-top: 10px;
+  background-color: #987b6c ;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.checkout-btn:hover {
+background-color: #d3c0b4;
+  border-color: #d3c0b4;
+  color: white;
+}
   </style>
   

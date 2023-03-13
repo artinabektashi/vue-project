@@ -53,7 +53,7 @@ const router = new Router({
       path: "/admin",
       name: "admin",
       component: Admin,
-      // meta: { isAdmin: true },
+      meta: { isAdmin: true },
       children: [
         {
           path: "list",
